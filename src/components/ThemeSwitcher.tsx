@@ -9,7 +9,7 @@ import {
 
 
 const ThemeSwitcher:React.FC = () => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme } = useTheme(); 
     return (<>
         <button className={`bordered border-slate-200`} onClick={toggleTheme} aria-label="Switch Dark and Light">{
             theme === 'light' ? <BsSun /> : <BsMoon />}</button>
