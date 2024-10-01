@@ -1,15 +1,15 @@
 import React from "react";
 import AdminLayout from "../../layout/adminLayout";
-import Article from "../../components/Admin/CMS/Article/Article";
+import PageAdd from "../../components/Admin/CMS/Pages/Add";
 
-const PostPage: React.FC = () => {
+const AddCmsPage: React.FC = () => {
   return (
     <>
       <AdminLayout>
-        <Article />
+        <PageAdd />
       </AdminLayout>
     </>
   );
 };
 
-export default PostPage;
+export default AddCmsPage;
