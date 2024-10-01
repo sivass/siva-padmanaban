@@ -1,15 +1,15 @@
 import React from "react";
 import AdminLayout from "../../layout/adminLayout";
-import Article from "../../components/Admin/CMS/Article/Article";
+import MenuList from "../../components/Admin/CMS/Menu/List";
 
-const PostPage: React.FC = () => {
+const MenuPage: React.FC = () => {
   return (
     <>
       <AdminLayout>
-        <Article />
+        <MenuList />
       </AdminLayout>
     </>
   );
 };
 
-export default PostPage;
+export default MenuPage;

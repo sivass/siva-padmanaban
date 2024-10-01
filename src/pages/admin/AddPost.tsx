@@ -1,12 +1,12 @@
 import React from "react";
-import AddPost from "../../components/Admin/AddPost";
 import AdminLayout from "../../layout/adminLayout";
+import AddArticle from "../../components/Admin/CMS/Article/AddArticle";
 
 const AddPostPage: React.FC = () => {
   return (
     <>
       <AdminLayout>
-        <AddPost />
+        <AddArticle />
       </AdminLayout>
     </>
   );

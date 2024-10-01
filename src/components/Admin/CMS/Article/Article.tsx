@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SearchIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 
-interface PostData {
+interface ArticleData {
   id: number;
   title: string;
   author: string;
@@ -9,49 +9,49 @@ interface PostData {
   status: 'draft' | 'published';
 }
 
-const Post: React.FC = () => {
-  const [posts, setPosts] = useState<PostData[]>([]);
+const Article: React.FC = () => {
+  const [articles, setArticles] = useState<ArticleData[]>([]);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 10;
+  const ArticlesPerPage = 10;
 
   useEffect(() => {
     // Mock API call - replace with actual data fetching
-    const fetchPosts = async () => {
-      const response = await new Promise<PostData[]>((resolve) =>
+    const fetchArticles = async () => {
+      const response = await new Promise<ArticleData[]>((resolve) =>
         setTimeout(() => resolve([
-          { id: 1, title: 'First Post', author: 'John Doe', date: '2023-04-01', status: 'published' },
-          { id: 2, title: 'Second Post', author: 'Jane Smith', date: '2023-04-02', status: 'draft' },
-          // ... more posts
+          { id: 1, title: 'First Article', author: 'John Doe', date: '2023-04-01', status: 'published' },
+          { id: 2, title: 'Second Article', author: 'Jane Smith', date: '2023-04-02', status: 'draft' },
+          // ... more Articles
         ]), 500)
       );
-      setPosts(response);
+      setArticles(response);
     };
 
-    fetchPosts();
+    fetchArticles();
   }, []);
 
-  const filteredPosts = posts.filter(post =>
-    (post.title.toLowerCase().includes(search.toLowerCase()) ||
-     post.author.toLowerCase().includes(search.toLowerCase())) &&
-    (filter === 'all' || post.status === filter)
+  const filteredArticles = articles.filter(Article =>
+    (Article.title.toLowerCase().includes(search.toLowerCase()) ||
+     Article.author.toLowerCase().includes(search.toLowerCase())) &&
+    (filter === 'all' || Article.status === filter)
   );
 
-  const pageCount = Math.ceil(filteredPosts.length / postsPerPage);
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const pageCount = Math.ceil(filteredArticles.length / ArticlesPerPage);
+  const indexOfLastArticle = currentPage * ArticlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - ArticlesPerPage;
+  const currentArticles = filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Posts</h1>
+      <h1 className="text-2xl font-bold mb-4">Articles</h1>
       
       <div className="mb-4 flex space-x-4">
         <div className="relative flex-grow">
           <input
             type="text"
-            placeholder="Search posts..."
+            placeholder="Search Articles..."
             className="w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -67,6 +67,7 @@ const Post: React.FC = () => {
           <option value="published">Published</option>
           <option value="draft">Draft</option>
         </select>
+        <a href='/admin/cms/article/add' className="px-4 py-2 rounded-lg border focus:outline-none focus:ring-2">Add Article</a>
       </div>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">
@@ -80,16 +81,16 @@ const Post: React.FC = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {currentPosts.map(post => (
-              <tr key={post.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{post.title}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{post.author}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{post.date}</td>
+            {currentArticles.map(Article => (
+              <tr key={Article.id}>
+                <td className="px-6 py-4 whitespace-nowrap">{Article.title}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{Article.author}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{Article.date}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    post.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                    Article.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                   }`}>
-                    {post.status}
+                    {Article.status}
                   </span>
                 </td>
               </tr>
@@ -123,4 +124,4 @@ const Post: React.FC = () => {
   );
 };
 
-export default Post;
+export default Article;
